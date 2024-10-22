@@ -14,19 +14,22 @@ import styles from "./styles.module.scss";
 
 type ISort = "asc" | "desc";
 
-{/** Лимит сделан так, а не через redux и запрос новых элементов из-за отсутствия у апишки такой возможности */}
-export const Table = () => {
-  const t = useTranslations('home');
+interface Props {
+  ssrProducts: IProduct[];
+}
+
+/** Лимит сделан так, а не через redux и запрос новых элементов из-за отсутствия у апишки такой возможности */
+export const Table = ({ ssrProducts }: Props) => {
+  const t = useTranslations("home");
 
   const [limit, setLimit] = useState<number>(6);
   const { paramValue: sortType, setQueryParam } = useQueryParams<ISort>("sort");
-  const { data, isLoading } = useGetProductsQuery({
+  const { data, isFetching } = useGetProductsQuery({
     sort: sortType || "desc",
     limit,
   });
 
-  if (isLoading) return <p>Тут будет крутиться лоадер</p>;
-  if (!data) return <>Тут мы можем перенаправить на страницу ошибки</>;
+  const products = data || ssrProducts;
 
   return (
     <section className={styles.container}>
@@ -49,15 +52,15 @@ export const Table = () => {
         onClick={() => setQueryParam(sortType === "asc" ? "desc" : "asc")}
         className={styles.sort}
       >
-        <p>{t('price')}</p>
+        <p>{t("price")}</p>
         {sortType === "asc" ? <SVGArrowDown /> : <SVGArrowUp />}
       </button>
       <div className={styles.products}>
-        {data.map((pr) => (
+        {products.map((pr) => (
           <Card {...pr} key={pr.id} />
         ))}
       </div>
-      <button onClick={() => setLimit((v) => v + 6)}>More</button>
+      <button onClick={() => setLimit((v) => v + 6)} disabled={isFetching}>{t("loadMore")}</button>
     </section>
   );
 };
@@ -65,6 +68,8 @@ export const Table = () => {
 interface CardProps extends IProduct {}
 
 const Card = ({ id, image, title, price, category }: CardProps) => {
+  const t = useTranslations("home");
+
   return (
     <Link href={`/${id}`} className={styles.card}>
       <span>{category}</span>
@@ -81,7 +86,11 @@ const Card = ({ id, image, title, price, category }: CardProps) => {
           alt={title}
         />
       </div>
-      <p className={styles.price}>{price} $</p>
+      <p className={styles.price}>
+        {t("priceValue", { price: price.toString() })}
+      </p>
     </Link>
   );
 };
+
+export default Table

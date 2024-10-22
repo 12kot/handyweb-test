@@ -1,8 +1,9 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { createWrapper } from 'next-redux-wrapper';
 import { configureStore } from '@reduxjs/toolkit';
 
 import { catalogApi } from './api/catalog';
 
-import { useDispatch, useSelector } from 'react-redux';
 
 export const makeStore = () => {
   return configureStore({
@@ -22,3 +23,5 @@ export type AppDispatch = AppStore['dispatch']
 
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
 export const useAppSelector = useSelector.withTypes<RootState>()
+
+export const wrapper = createWrapper<AppStore>(makeStore, { debug: true });
