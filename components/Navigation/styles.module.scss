@@ -1,0 +1,15 @@
+.container {
+  padding: 15px var(--page-padding-x);
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+
+  ul {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xl);
+  }
+}

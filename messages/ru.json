@@ -1,0 +1,19 @@
+{
+  "header": {
+    "favorite": "Favorite",
+    "search": "Search"
+  },
+
+  "navigation": {
+    "main": "Main page",
+    "delivery": "Delivery",
+    "contact": "Contact",
+    "blog": "Blog"
+  },
+
+  "home": {
+    "title": "Home",
+    "filters": "Filters",
+    "price": "Price"
+  }
+}

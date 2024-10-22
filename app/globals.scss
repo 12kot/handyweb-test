@@ -1,0 +1,103 @@
+:root {
+  --bg-color: #ffffff; //+
+  --bg-color-second: #e2e8f0;
+  --bg-color-modal: #12121c80;
+
+  --main-color: #137547;
+  --main-color-second: #e2edea;
+
+  --border-color: #e2e8f0; //+
+  --border-color-main: #0f5e39;
+
+  --font-color: #12121c; //+
+  --font-color-second: #818181; //+
+  --font-color-light: #e2e8f0; //+
+  --font-color-negative: #ffffff;
+
+  --box-shadow: 0px 1px 2px 0px #0000000d;
+
+  --red: #e42717;
+  --red-second: #e328161a;
+
+  --blue: #291cdf; //+
+  --blue-second: #291cdf1a; //+
+
+  --transition: 0.5s;
+
+  --header-height: 70px; //+
+  --page-padding-x: 169px; //+
+  --gap: 8px; //+
+  --gap-xl: 32px; //+
+  --border-radius: 8px; //+
+
+  --font-size: 14px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+
+  color: var(--font-color);
+}
+
+body {
+  background-color: var(--bg-color);
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+
+  font-family: "Exo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+svg {
+  fill: var(--font-color);
+  width: 24px;
+  height: 24px;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  width: fit-content;
+  cursor: pointer;
+}
+
+p,
+label,
+a,
+span {
+  font-family: "Exo", sans-serif;
+  color: var(--font-color);
+  font-size: var(--font-size);
+}
+
+span {
+  color: var(--font-color-second);
+}
+
+input {
+  font-size: var(--font-size);
+  border: none;
+  cursor: pointer;
+}
+
+label {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  font-size: var(--font-size);
+}
