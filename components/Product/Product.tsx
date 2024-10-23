@@ -18,7 +18,6 @@ interface Props {
 export const ProductContainer = ({ product }: Props) => {
   const t = useTranslations("product");
   const [favorite, setFavorite] = useLocalStorage<number[]>("favorite", []);
-  console.log(favorite);
 
   const handleFavorite = () => {
     if (favorite?.includes(product.id))

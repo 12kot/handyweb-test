@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import Head from "next/head";
-import { notFound } from "next/navigation";
 
 import {
   generatePageMetadata,
@@ -8,6 +7,7 @@ import {
   IProduct,
   sendSsrRequest,
 } from "@/features";
+import { redirect } from "next/navigation";
 
 const ProductContainer = React.lazy(
   () => import("@/components/Product/Product")
@@ -28,7 +28,7 @@ const Product = async ({ params: { id } }: Props) => {
     undefined
   );
 
-  if (!data) return notFound();
+  if (!data) return redirect("/ru/404");
   return (
     <>
       <Head>
