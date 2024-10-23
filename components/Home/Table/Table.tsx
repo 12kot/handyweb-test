@@ -5,12 +5,13 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/navigation";
-import { cx, IProduct, useQueryParams } from "@/features";
+import { APP_ROUTES, cx, IProduct, useQueryParams } from "@/features";
 import { useGetProductsQuery } from "@/store";
 
 import { SVGArrowDown, SVGArrowUp } from "@/public/svg";
 
 import styles from "./styles.module.scss";
+import { ProductPath } from "@/components";
 
 type ISort = "asc" | "desc";
 
@@ -33,18 +34,8 @@ export const Table = ({ ssrProducts }: Props) => {
 
   return (
     <section className={styles.container}>
-      <div className={styles.path}>
-        {/** Ожидаю это с бека, но не получаю */}
-        {["Main", "Catalog"].map((el, i) => (
-          <Link
-            href="/kakaya-to-id"
-            key={i}
-            className={cx(i === 1 && styles.bold)}
-          >
-            {`${el} ${i !== 1 ? ">" : ""}`}
-          </Link>
-        ))}
-      </div>
+      {/** Ожидаю это с бека, но не получаю */}
+      {<ProductPath urls={["Main", "Catalog"]} />}
       {/** Ожидаю это с бека, но не получаю */}
       <h1>Catalog</h1>
       {/** api сортирует по id, не по цене. Вина в неправильной сортировке не моя. На фронте сортировать глупо */}
@@ -60,7 +51,9 @@ export const Table = ({ ssrProducts }: Props) => {
           <Card {...pr} key={pr.id} />
         ))}
       </div>
-      <button onClick={() => setLimit((v) => v + 6)} disabled={isFetching}>{t("loadMore")}</button>
+      <button onClick={() => setLimit((v) => v + 6)} disabled={isFetching}>
+        {t("loadMore")}
+      </button>
     </section>
   );
 };
@@ -71,7 +64,7 @@ const Card = ({ id, image, title, price, category }: CardProps) => {
   const t = useTranslations("home");
 
   return (
-    <Link href={`/${id}`} className={styles.card}>
+    <Link href={`/${APP_ROUTES.PRODUCT.path}/${id}`} className={styles.card}>
       <span>{category}</span>
       <b className={styles.title} title={title}>
         {title}
@@ -93,4 +86,4 @@ const Card = ({ id, image, title, price, category }: CardProps) => {
   );
 };
 
-export default Table
+export default Table;

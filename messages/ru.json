@@ -17,5 +17,9 @@
     "price": "Price",
     "priceValue": "{ price } $",
     "loadMore": "Load More"
+  },
+
+  "product": {
+    "title": "Product"
   }
 }

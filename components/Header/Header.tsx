@@ -11,21 +11,21 @@ import { SVGFavorite, SVGLogo, SVGSearch } from "@/public/svg";
 import styles from "./styles.module.scss";
 
 export const Header = () => {
-  const t = useTranslations('header');
+  const t = useTranslations("header");
 
   return (
     <header className={styles.container}>
-      <div className={styles.logo}>
+      <Link href="/" className={styles.logo}>
         <SVGLogo />
-      </div>
+      </Link>
       <Input
-        placeholder={t('search')}
+        placeholder={t("search")}
         icon={<SVGSearch />}
         className={styles.search}
       />
       <Link href="" className={styles.favorite}>
         <SVGFavorite />
-        <p>{t('favorite')}</p>
+        <p>{t("favorite")}</p>
       </Link>
     </header>
   );

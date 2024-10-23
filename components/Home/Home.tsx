@@ -2,10 +2,12 @@
 
 import React, { Suspense } from "react";
 
-import { useQueryParams } from "../hooks";
+import { useQueryParams } from "../../features/hooks";
 
-import { IProduct } from "../types";
+import { IProduct } from "../../features/types";
 import { Filters } from "./Filters";
+
+import styles from "./styles.module.scss";
 
 const Table = React.lazy(() => import("./Table/Table"));
 
@@ -25,7 +27,7 @@ export const HomeContainer = ({ products }: Props) => {
   };
 
   return (
-    <>
+    <div className={styles.container}>
       <Filters
         handleFilterChange={handleFilterChange}
         selectedFilter={Number(selectedFilter)}
@@ -33,7 +35,7 @@ export const HomeContainer = ({ products }: Props) => {
       <Suspense fallback={<div>Loading...</div>}>
         <Table ssrProducts={products} />
       </Suspense>
-    </>
+    </div>
   );
 };
 

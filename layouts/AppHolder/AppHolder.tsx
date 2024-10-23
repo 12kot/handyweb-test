@@ -14,11 +14,11 @@ interface Props {
 
 export const AppHolder = ({ children, footer, header, navigation }: Props) => {
   return (
-    <main className={cx(styles.container, header && styles.header)}>
+    <div className={cx(styles.container, header && styles.header)}>
       {header && <Header />}
       {navigation && <Navigation />}
-      {children}
+      <main className={styles.outlet}>{children}</main>
       {footer && <Footer />}
-    </main>
+    </div>
   );
 };

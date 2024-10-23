@@ -1,0 +1,10 @@
+.path {
+  display: flex;
+  gap: var(--gap);
+
+  flex-wrap: wrap;
+
+  .bold {
+    font-weight: 600;
+  }
+}
