@@ -4,4 +4,5 @@ export * from "./Input";
 export * from "./ProductPath";
 export * from "./Navigation";
 export * from "./Home";
+export * from "./Favorite";
 export * from "./Product";

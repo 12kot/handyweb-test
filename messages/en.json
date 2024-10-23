@@ -1,0 +1,40 @@
+{
+  "header": {
+    "favorite": "Favorite",
+    "search": "Search"
+  },
+
+  "navigation": {
+    "main": "Main page",
+    "delivery": "Delivery",
+    "contact": "Contact",
+    "blog": "Blog"
+  },
+
+  "home": {
+    "title": "Home",
+    "description": "meta data",
+    "filters": "Filters",
+    "price": "Price",
+    "priceValue": "{ price } $",
+    "loadMore": "Load More"
+  },
+
+  "product": {
+    "title": "Product",
+    "rated": "({ rating } rated)",
+    "addToFav": "Add To Favorite",
+    "removeToFav": "Remove From Favorite",
+    "description": "Description",
+    "buy": "BUY",
+    "priceValue": "{ price } $"
+  },
+
+  "favorite": {
+    "title": "Favorite",
+    "description": "meta data",
+    "items": "{ count } item",
+    "remove": "Remove",
+    "priceValue": "{ price } $"
+  }
+}

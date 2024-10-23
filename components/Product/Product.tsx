@@ -1,18 +1,32 @@
+"use client";
+
 import React from "react";
-
-import { cx, IProduct } from "@/features";
-import { ProductPath } from "@/components";
-
-import styles from "./styles.module.scss";
 import Image from "next/image";
 
+import { cx, IProduct, useLocalStorage } from "@/features";
+import { ProductPath } from "@/components";
+
 import { SVGFavorite, SVGStar } from "@/public/svg";
+
+import styles from "./styles.module.scss";
+import { useTranslations } from "next-intl";
 
 interface Props {
   product: IProduct;
 }
 
 export const ProductContainer = ({ product }: Props) => {
+  const t = useTranslations("product");
+  const [favorite, setFavorite] = useLocalStorage<number[]>("favorite", []);
+  console.log(favorite);
+
+  const handleFavorite = () => {
+    if (favorite?.includes(product.id))
+      return setFavorite(favorite?.filter((v) => v !== product.id));
+
+    setFavorite([...(favorite || []), product.id]);
+  };
+
   return (
     <div className={styles.container}>
       {/** Ожидаю это с бека, но не получаю */}
@@ -38,24 +52,29 @@ export const ProductContainer = ({ product }: Props) => {
                   .map((_, i) => (
                     <SVGStar isYellow={i + 1 < product.rating.rate} key={i} />
                   ))}
-                <p>({product.rating.count} rated)</p>
+                <p>{t("rated", { rating: product.rating.count })}</p>
               </div>
             </div>
             <div className={styles.actions}>
-              <button>
-                <p>Add To Favorite</p> <SVGFavorite />
+              <button onClick={handleFavorite}>
+                <p>
+                  {favorite?.includes(product.id)
+                    ? t("removeToFav")
+                    : t("addToFav")}
+                </p>
+                <SVGFavorite />
               </button>
             </div>
           </div>
           <hr />
           <div className={styles.price}>
             <div className={styles.block}>
-              <b>Description</b>
+              <b>{t('description')}</b>
               <p>{product.description}</p>
             </div>
             <div className={cx(styles.block, styles.rigth)}>
-              <h2>{product.price} $</h2>
-              <button>КУПИТЬ</button>
+              <h2>{t('priceValue', {price: product.price})}</h2>
+              <button>{t('buy')}</button>
             </div>
           </div>
         </section>

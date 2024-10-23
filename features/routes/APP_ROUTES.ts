@@ -26,6 +26,10 @@ export const APP_ROUTES: IRoute = {
     text: "product",
     path: "/product",
   },
+  FAVORITE: {
+    text: "favorite",
+    path: "/favorite",
+  },
 };
 
 interface IRoute {

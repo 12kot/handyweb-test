@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
@@ -32,6 +32,11 @@ export const Table = ({ ssrProducts }: Props) => {
 
   const products = data || ssrProducts;
 
+  const memoizedProducts = useMemo(
+    () => products.map((pr) => <MemoizedCard {...pr} key={pr.id} />),
+    [products]
+  );
+
   return (
     <section className={styles.container}>
       {/** Ожидаю это с бека, но не получаю */}
@@ -46,11 +51,7 @@ export const Table = ({ ssrProducts }: Props) => {
         <p>{t("price")}</p>
         {sortType === "asc" ? <SVGArrowDown /> : <SVGArrowUp />}
       </button>
-      <div className={styles.products}>
-        {products.map((pr) => (
-          <Card {...pr} key={pr.id} />
-        ))}
-      </div>
+      <div className={styles.products}>{memoizedProducts}</div>
       <button onClick={() => setLimit((v) => v + 6)} disabled={isFetching}>
         {t("loadMore")}
       </button>
@@ -77,6 +78,7 @@ const Card = ({ id, image, title, price, category }: CardProps) => {
           height={0}
           src={image}
           alt={title}
+          loading="lazy"
         />
       </div>
       <p className={styles.price}>
@@ -85,5 +87,7 @@ const Card = ({ id, image, title, price, category }: CardProps) => {
     </Link>
   );
 };
+
+const MemoizedCard = React.memo(Card);
 
 export default Table;

@@ -10,6 +10,9 @@
   .outlet {
     flex-grow: 1;
     height: 100%;
+    
+    padding-right: var(--page-padding-x);
+    padding-left: var(--page-padding-x);
   }
 }
 
